@@ -100,18 +100,24 @@ export default function LoginScreen() {
     // Вызов функции getFines
     const fines = await getFines(regNumber, stsNumber);
 
+    if (fines === null){
+      alert("Ответ на запрос не был получен!");
+      return;
+    }
     if (fines.message){
       alert(fines.message);
       return;
     }
-    
-    // Проверка, что ответ от API содержит штрафы
-    if (fines && fines.length > 0) {
+    if (fines.error){
+      alert(fines.error);
+      return;
+    }
+    if (fines.length > 0){
       console.log(fines); 
       await storeDataJSON('fines', fines);
     }
     else {
-      alert("У вас нет штрафов!");
+      alert("Штрафы не обнаружены");
     }
 
     navigation.navigate('Home');

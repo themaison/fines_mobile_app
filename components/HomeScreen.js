@@ -17,10 +17,10 @@ export default function HomeScreen() {
       const regNumber = await getData('regNumber');
       const stsNumber = await getData('stsNumber');
       const savedFines = await getDataJSON('fines');
+
       setRegNumber(regNumber);
       setStsNumber(stsNumber);
-      setFines(savedFines.fines);
-      console.log({regNumber}, {strNumber}, {savedFines});
+      setFines(savedFines);
     };
 
     fetchData();
@@ -43,7 +43,7 @@ export default function HomeScreen() {
           <Text style={styles.amountText}>Всего: {fines.length}</Text>
         </View>
         <ScrollView style={styles.finesContainer}>
-          {fines.map((fine, index) => (
+          {fines.length > 0 && fines.map((fine, index) => (
             <Fine 
               key={index}
               text={fine.koap_text}
