@@ -1,5 +1,6 @@
 import React from "react";
 import { TouchableOpacity, View, Text, StyleSheet } from "react-native";
+import styles from '../styles/FineDescStyles';
 
 const FineDescription = (props) => {
     return (
@@ -10,23 +11,23 @@ const FineDescription = (props) => {
     )
 }
 
-const styles = StyleSheet.create({
-    dataBlock: {
-        //backgroundColor: "#F3F6E2",
-        marginBottom: 20,
-      },
+// const styles = StyleSheet.create({
+//     dataBlock: {
+//         //backgroundColor: "#F3F6E2",
+//         marginBottom: 20,
+//       },
     
-      dataTitle: {
-        fontSize: 16,
-        fontWeight: 'bold',
-        color: "#232323",
-      },
+//       dataTitle: {
+//         fontSize: 16,
+//         fontWeight: 'bold',
+//         color: "#232323",
+//       },
     
-      dataDesc: {
-        marginTop: 10,
-        fontSize: 14,
-        color: "#929292",
-      },
-});
+//       dataDesc: {
+//         marginTop: 10,
+//         fontSize: 14,
+//         color: "#929292",
+//       },
+// });
 
 export default FineDescription;

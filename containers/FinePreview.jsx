@@ -1,6 +1,7 @@
 import React from "react";
 import { TouchableOpacity, View, Text, StyleSheet } from "react-native";
 import { useNavigation } from '@react-navigation/native';
+import styles from '../styles/FinePrevStyles';
 
 const FinePreview = (props) => {
     const navigation = useNavigation();
@@ -21,46 +22,46 @@ const FinePreview = (props) => {
     )
 }
 
-const styles = StyleSheet.create({
-    fineBlank: {
-        paddingHorizontal: 20,
-        paddingVertical: 10,
-        backgroundColor: "#F8F9F2",
-        borderRadius: 15,
-        marginBottom: 10,
-    },
+// const styles = StyleSheet.create({
+//     fineBlank: {
+//         paddingHorizontal: 20,
+//         paddingVertical: 10,
+//         backgroundColor: "#F8F9F2",
+//         borderRadius: 15,
+//         marginBottom: 10,
+//     },
 
-    fineBlankTitle: {
-        fontSize: 18,
-        fontWeight: "bold",
-        color: "#232323",
-    },
+//     fineBlankTitle: {
+//         fontSize: 18,
+//         fontWeight: "bold",
+//         color: "#232323",
+//     },
 
-    fineBlankDateTime: {
-        fontSize: 14,
-        color: "#929292",
-        marginTop: 20,
-    },
+//     fineBlankDateTime: {
+//         fontSize: 14,
+//         color: "#929292",
+//         marginTop: 20,
+//     },
 
-    fineBlankPayBlock:{
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-    },
+//     fineBlankPayBlock:{
+//         flexDirection: 'row',
+//         justifyContent: 'space-between',
+//         alignItems: 'center',
+//     },
 
-    fineBlankStatus: {
-        flex: 1,
-        color: "#FF003D",
-        fontWeight: "bold",
-    },
+//     fineBlankStatus: {
+//         flex: 1,
+//         color: "#FF003D",
+//         fontWeight: "bold",
+//     },
 
-    fineBlankCost: {
-        fontSize: 24,
-        fontWeight: "bold",
-        color: "#232323",
-        marginTop: 5,
-        textAlign: "right",
-    },
-});
+//     fineBlankCost: {
+//         fontSize: 24,
+//         fontWeight: "bold",
+//         color: "#232323",
+//         marginTop: 5,
+//         textAlign: "right",
+//     },
+// });
 
 export default FinePreview;
