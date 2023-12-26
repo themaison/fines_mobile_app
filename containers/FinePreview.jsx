@@ -2,11 +2,11 @@ import React from "react";
 import { TouchableOpacity, View, Text, StyleSheet } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 
-const Fine = (props) => {
+const FinePreview = (props) => {
     const navigation = useNavigation();
 
     const fineButtonPress = async () => {
-        navigation.navigate('Fine', { fineKey: props.key });
+        navigation.navigate('Fine', { fineIndex: props.fineIndex });
       };
 
     return (
@@ -63,4 +63,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Fine;
+export default FinePreview;

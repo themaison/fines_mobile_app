@@ -3,7 +3,7 @@ import { TouchableOpacity, StyleSheet, Text, View, Button } from 'react-native';
 import React, { useEffect, useState} from 'react';
 import { useNavigation } from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import Violation from './Violation';
+import FineDescription from '../containers/FineDescription';
 
 export default function FineScreen({ route }) {
   const navigation = useNavigation();
@@ -15,8 +15,9 @@ export default function FineScreen({ route }) {
     const fetchFineData = async () => {
       const regNumber = await getData('regNumber');
       const stsNumber = await getData('stsNumber');
-      const fines = await getData('fines');
-      const fine = fines[route.params.fineKey];
+      const fines = await getDataJSON('fines');
+      const fine = fines[route.params.fineIndex];
+      
       setRegNumber(regNumber);
       setStsNumber(stsNumber);
       setFineData(fine);
@@ -48,14 +49,14 @@ export default function FineScreen({ route }) {
         </View>
       )}
 
-<View style={styles.violatioСontainer}>
+<View style={styles.violationСontainer}>
   <ScrollView style={styles.violationData}>
-    <Violation title="Дата и время нарушения" desc={fineData.date_decision}/>
-    <Violation title="Статья КоАП" desc={fineData.koap_code}/>
-    <Violation title="КБК" desc={fineData.kbk}/>
-    <Violation title="Номер постановления" desc={fineData.num_post}/>
-    <Violation title="Дата постановления" desc={fineData.date_post}/>
-    <Violation title="Подразделение" desc={fineData.division_name}/>      
+    <FineDescription title="Дата и время нарушения" desc={fineData.date_decision}/>
+    <FineDescription title="Статья КоАП" desc={fineData.koap_code}/>
+    <FineDescription title="КБК" desc={fineData.kbk}/>
+    <FineDescription title="Номер постановления" desc={fineData.num_post}/>
+    <FineDescription title="Дата постановления" desc={fineData.date_post}/>
+    <FineDescription title="Подразделение" desc={fineData.division_name}/>      
   </ScrollView>
 
   <TouchableOpacity
@@ -113,7 +114,7 @@ const styles = StyleSheet.create({
   //   color: "#929292",
   // },
 
-  violatioContainer: {
+  violationContainer: {
     marginTop: 20,
     flex: 1,
     // другие стили...

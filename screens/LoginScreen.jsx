@@ -1,10 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
-import { TouchableOpacity, StyleSheet, Text, View, TextInput, Button } from 'react-native';
+import { TouchableOpacity, StyleSheet, Text, View, TextInput} from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { getFines } from './FinesAPI';
-import { storeDataJSON, getDataJSON } from './SessionJSON';
-import { storeData, getData } from './Session';
+import { getFines } from '../api/FinesAPI';
+import { storeDataJSON} from '../store/SessionJSON';
+import { storeData, getData } from '../store/Session';
 
 export default function LoginScreen() {
   const [vehicleType, setVehicleType] = useState('auto');
@@ -23,7 +23,6 @@ export default function LoginScreen() {
 
   useEffect(() => {
     const loadUserData = async () => {
-
       const savedVehicleType = await getData('vehicleType');
       const savedRegNumber = await getData('regNumber');
       const savedStsNumber = await getData('stsNumber');
@@ -33,8 +32,13 @@ export default function LoginScreen() {
       if (savedVehicleType !== null) setVehicleType(savedVehicleType);
       if (savedRegNumber !== null) setRegNumber(savedRegNumber);
       if (savedStsNumber !== null) setStsNumber(savedStsNumber);
+    };
+  
+    loadUserData();
+  }, []);
 
-      switch (vehicleType) {
+useEffect(() => {
+    switch (vehicleType) {
         case 'auto':
           setRegNumberAuto(regNumber);
           break;
@@ -45,12 +49,10 @@ export default function LoginScreen() {
           setRegNumberTrailer(regNumber);
           break;
       }
-    };
-  
-    loadUserData();
-  }, []);
+  }, [vehicleType, regNumber]);
 
-  const homeButtonPress = async () => {
+
+  const finesButtonPress = async () => {
     let regNumberPattern;
     let currentRegNumber;
     //console.log();
@@ -120,7 +122,7 @@ export default function LoginScreen() {
       alert("Штрафы не обнаружены");
     }
 
-    navigation.navigate('Home');
+    navigation.navigate('Fines');
   };
   
 
@@ -202,7 +204,7 @@ export default function LoginScreen() {
 
           <TouchableOpacity
           style={styles.button}
-          onPress={homeButtonPress}>
+          onPress={finesButtonPress}>
             <Text style={styles.buttonText}>Далее</Text>
           </TouchableOpacity>
 

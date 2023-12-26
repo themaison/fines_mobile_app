@@ -2,11 +2,11 @@ import { StatusBar } from 'expo-status-bar';
 import { TouchableOpacity, StyleSheet, Text, View, ScrollView } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { storeDataJSON, getDataJSON } from './SessionJSON';
-import { storeData, getData } from './Session';
-import Fine from './Fine';
+import {getDataJSON } from '../store/SessionJSON';
+import {getData } from '../store/Session';
+import FinePreview from '../containers/FinePreview';
 
-export default function HomeScreen() {
+export default function FinesScreen() {
   const navigation = useNavigation();
   const [regNumber, setRegNumber] = useState('');
   const [stsNumber, setStsNumber] = useState('');
@@ -44,8 +44,9 @@ export default function HomeScreen() {
         </View>
         <ScrollView style={styles.finesContainer}>
           {fines.length > 0 && fines.map((fine, index) => (
-            <Fine 
+            <FinePreview 
               key={index}
+              fineIndex={index}
               text={fine.koap_text}
               date={fine.date_decision.split(' ')[0]}
               time={fine.date_decision.split(' ')[1]}

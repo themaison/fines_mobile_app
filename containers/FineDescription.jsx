@@ -1,7 +1,7 @@
 import React from "react";
 import { TouchableOpacity, View, Text, StyleSheet } from "react-native";
 
-const Violation = (props) => {
+const FineDescription = (props) => {
     return (
         <TouchableOpacity style={styles.dataBlock}>
             <Text style={styles.dataTitle}>{props.title}</Text>
@@ -29,4 +29,4 @@ const styles = StyleSheet.create({
       },
 });
 
-export default Violation;
+export default FineDescription;
