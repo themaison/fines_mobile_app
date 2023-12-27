@@ -2,8 +2,8 @@ import { StatusBar } from 'expo-status-bar';
 import { TouchableOpacity, StyleSheet, Text, View, ScrollView } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import {getDataJSON } from '../store/SessionJSON';
-import {getData } from '../store/Session';
+import { getDataJSON, storeDataJSON} from '../store/SessionJSON';
+import { storeData, getData } from '../store/Session';
 import FinePreview from '../containers/FinePreview';
 import styles from '../styles/FinesStyles';
 
@@ -25,6 +25,7 @@ export default function FinesScreen() {
     };
 
     fetchData();
+    return
   }, []);
 
   const exitButtonPress = async () => {
@@ -41,10 +42,11 @@ export default function FinesScreen() {
       <View style={styles.fines}>
         <View style={styles.finesTitle}>
           <Text style={styles.topicText}>Штрафы</Text>
-          <Text style={styles.amountText}>Всего: {fines.fines.length}</Text>
+          <Text style={styles.amountText}>Всего: {fines.length}</Text>
         </View>
+
         <ScrollView style={styles.finesContainer}>
-          {fines.fines.length > 0 && fines.fines.map((fine, index) => (
+          {fines.length > 0 && fines.map((fine, index) => (
             <FinePreview 
               key={index}
               fineIndex={index}
@@ -56,6 +58,7 @@ export default function FinesScreen() {
             />
           ))}
         </ScrollView>
+        
       </View>
 
       <TouchableOpacity

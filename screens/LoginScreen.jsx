@@ -3,9 +3,10 @@ import { TouchableOpacity, StyleSheet, Text, View, TextInput} from 'react-native
 import React, { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { getFines } from '../api/FinesAPI';
-import { storeDataJSON} from '../store/SessionJSON';
+import { getDataJSON, storeDataJSON} from '../store/SessionJSON';
 import { storeData, getData } from '../store/Session';
 import styles from '../styles/LoginStyles';
+import { finesData } from '../data/FinesData';
 
 export default function LoginScreen() {
   const [vehicleType, setVehicleType] = useState('auto');
@@ -101,13 +102,14 @@ useEffect(() => {
     await storeData('stsNumber', stsNumber);
 
     // Вызов функции getFines
-    const finesResponse = await getFines(regNumber, stsNumber);
+    //const finesResponse = await getFines(regNumber, stsNumber);
+    const finesResponse = finesData[regNumber];
 
     if (!finesResponse){
       alert("Ответ на запрос не был получен!");
       return;
     }
-    if (finesResponse.message){
+    if (!finesResponse.fines && finesResponse.message){
       alert(fines.message);
       return;
     }
@@ -115,9 +117,13 @@ useEffect(() => {
       alert(finesResponse.error);
       return;
     }
-    if (finesResponse.fines.length > 0){
-      console.log(finesResponse.fines); 
-      await storeDataJSON('fines', finesResponse);
+    // console.log(finesResponse.fines);
+    // console.log(finesResponse.fines.length);
+    // return;
+
+    if (finesResponse.fines && finesResponse.fines.length > 0){
+      await storeDataJSON('fines', finesResponse.fines);
+      const f = await getDataJSON('fines');
     }
     else {
       alert("Штрафы не обнаружены");
